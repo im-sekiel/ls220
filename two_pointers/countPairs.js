@@ -1,5 +1,20 @@
 function countPairs(nums, target) {
+  let start = 0;
+  let end = nums.length - 1;
+  let count = 0;
 
+  while (start < end) {
+    let num1 = nums[start];
+    let num2 = nums[end];
+
+    if (num1 + num2 > target) {
+      count += end - start;
+      end -= 1;
+    }
+    start += 1;
+  }
+
+  return count;
 }
 
 console.log(countPairs([1, 2, 3, 4, 5], 6) == 4);
