@@ -89,32 +89,67 @@ function createLinkedList(arr) {
 //   return dummy.next;
 // }
 
+// function reverseSegment(head, start, end) {
+//   let dummy = new ListNode(null);
+//   let prev = dummy;
+//   let curr = head;
+//   dummy.next = head;
+//   let index = 1;
+
+//   while (curr) {
+//     if (index === start) {
+//       let reversePrev = null;
+//       let reverse = curr;
+
+//       while (index <= end) {
+//         let nextNode = reverse.next;
+//         reverse.next = reversePrev;
+//         reversePrev = reverse;
+//         reverse = nextNode;
+//         index += 1;
+//       }
+
+//       prev.next = reversePrev;
+//       console.log(curr);
+
+//       console.log(reversePrev, 'sadas');
+//       break;
+
+//     }
+//     else {
+//       index += 1;
+//       prev = curr;
+//       curr = curr.next;
+//     }
+//   }
+
+//   return dummy.next;
+// }
+
 function reverseSegment(head, start, end) {
   let dummy = new ListNode(null);
+  dummy.next = head;
   let prev = dummy;
   let curr = head;
-  dummy.next = head;
   let index = 1;
 
   while (curr) {
     if (index === start) {
-      let reversePrev = null;
-      let reverse = curr;
+      let innerPrev = null;
+      let innerEnd = curr;
+      let nextNode;
 
       while (index <= end) {
-        let nextNode = reverse.next;
-        reverse.next = reversePrev;
-        reversePrev = reverse;
-        reverse = nextNode;
+        nextNode = curr.next;
+        curr.next = innerPrev;
+        innerPrev = curr;
+        curr = nextNode;
         index += 1;
       }
 
-      prev.next = reversePrev;
-      console.log(curr);
-
-      console.log(reversePrev, 'sadas');
+      prev.next = innerPrev;
+      innerEnd.next = curr;
       break;
-
     }
     else {
       index += 1;
@@ -125,7 +160,8 @@ function reverseSegment(head, start, end) {
 
   return dummy.next;
 }
-
+// 4 7
+// 1 -> 2 -> 3 -> 7 -> 6 -> 5 -> 4 -> 8 -> 9 -> 10 -> null
 let list1 = createLinkedList([1, 3, 5, 7, 9]);
 // reverse.next = null    reverse.next = 3
 // reversePrev = 3        reversePrev = 5
